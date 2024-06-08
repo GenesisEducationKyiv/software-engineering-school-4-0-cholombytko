@@ -12,7 +12,7 @@ export class ScheduleService {
 
   @Cron(CronExpression.EVERY_DAY_AT_NOON)
   public async sendEmails(): Promise<void> {
-    const { currencyCode, rate, date } =
+    const { currencyCode, date, rate } =
       await this.rateService.getExchangeRate();
 
     const mailMessage = this.mailHtmlTemplate(currencyCode, rate, date);

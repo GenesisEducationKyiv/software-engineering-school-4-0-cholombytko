@@ -9,11 +9,11 @@ import { MailerModule } from '@nestjs-modules/mailer';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         transport: {
-          host: configService.get<string>('SMTP_HOST'),
           auth: {
-            user: configService.get<string>('SMTP_USER'),
             pass: configService.get<string>('SMTP_PASSWORD'),
+            user: configService.get<string>('SMTP_USER'),
           },
+          host: configService.get<string>('SMTP_HOST'),
         },
       }),
     }),

@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
-import { HttpModule } from '@nestjs/axios';
-import { RateService } from './rate.service';
 import { RateController } from './rate.controller';
+import { RateService } from './rate.service';
+import { HttpModule } from '@nestjs/axios';
+import { Module } from '@nestjs/common';
 
 @Module({
-  imports: [HttpModule],
   controllers: [RateController],
-  providers: [RateService],
   exports: [RateService],
+  imports: [HttpModule],
+  providers: [RateService],
 })
 export class RateModule {}

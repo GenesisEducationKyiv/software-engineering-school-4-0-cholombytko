@@ -1,5 +1,5 @@
 export interface ISendToSubscribers {
-  readonly subject: string;
-
   readonly html: string;
+
+  readonly subject: string;
 }

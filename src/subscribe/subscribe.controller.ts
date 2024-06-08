@@ -1,7 +1,7 @@
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
-import { SubscribeService } from './subscribe.service';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { ISubscribeResult } from './interfaces/subscribe-response.interface';
+import { SubscribeService } from './subscribe.service';
+import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 
 @Controller('subscribe')
 export class SubscribeController {

@@ -1,7 +1,7 @@
-import { MailerService } from '@nestjs-modules/mailer';
-import { Injectable } from '@nestjs/common';
-import { ISendMail } from '../interfaces/send-mail.interface';
 import { MailSendingException } from '../exceptions/mail-sending.exception';
+import { ISendMail } from '../interfaces/send-mail.interface';
+import { Injectable } from '@nestjs/common';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class MailingService {
@@ -10,9 +10,9 @@ export class MailingService {
   public async sendMail(payload: ISendMail): Promise<void> {
     try {
       await this.mailerService.sendMail({
-        to: payload.to,
-        subject: payload.subject,
         html: payload.html,
+        subject: payload.subject,
+        to: payload.to,
       });
     } catch (error) {
       console.error('Error sending email: ', error);
