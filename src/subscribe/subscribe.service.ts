@@ -16,7 +16,7 @@ export class SubscribeService {
     payload: ICreateSubscription,
   ): Promise<ISubscribeResult> {
     await this.emailService.create(payload.email);
-    return { message: 'E-mail succesfully subscribed' };
+    return { message: 'E-mail successfully subscribed' };
   }
 
   public async sendMailToSubscribers(
