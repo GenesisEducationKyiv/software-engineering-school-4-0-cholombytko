@@ -6,7 +6,7 @@ import { EmailService } from 'src/email/services/email.service';
 import { MailingService } from 'src/email/services/mailing.service';
 
 @Injectable()
-export class SubscribeService {
+export class SubscriptionService {
   constructor(
     private readonly emailService: EmailService,
     private readonly mailingService: MailingService,
