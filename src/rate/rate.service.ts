@@ -1,12 +1,13 @@
 import { IGetExchangeRateResponse } from './interfaces/get-exchange-rate.interface';
 import { IRate } from './interfaces/rate.interface';
+import { IRateService } from './interfaces/rate-service.interface';
 import { API_URL } from './rate.constants';
 import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
-export class RateService {
+export class RateService implements IRateService {
   constructor(private httpService: HttpService) {}
 
   public async getExchangeRate(): Promise<IRate> {

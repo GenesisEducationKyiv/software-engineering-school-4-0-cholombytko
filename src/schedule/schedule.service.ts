@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { RateService } from 'src/rate/rate.service';
+import { IRateService } from 'src/rate/interfaces/rate-service.interface';
 import { SubscriptionService } from 'src/subscription/subscription.service';
 
 @Injectable()
 export class ScheduleService {
   constructor(
     private readonly subscriptionService: SubscriptionService,
-    private readonly rateService: RateService,
+    private readonly rateService: IRateService,
   ) {}
 
   @Cron(CronExpression.EVERY_DAY_AT_NOON)
