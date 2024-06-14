@@ -1,12 +1,12 @@
+import { DatabaseModule } from './database.module';
+import { EmailModule } from './email/email.module';
+import { MailModule } from './mail.module';
+import { RateModule } from './rate/rate.module';
+import { ScheduleModule as ScheduleMailModule } from './schedule/schedule.module';
+import { SubscriptionModule } from './subscription/subscription.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
-import { RateModule } from './rate/rate.module';
-import { EmailModule } from './email/email.module';
-import { SubscribeModule } from './subscribe/subscribe.module';
-import { DatabaseModule } from './database.module';
-import { MailModule } from './mail.module';
-import { ScheduleModule as ScheduleMailModule } from './schedule/schedule.module';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { ScheduleModule as ScheduleMailModule } from './schedule/schedule.module
     ScheduleModule.forRoot(),
     RateModule,
     EmailModule,
-    SubscribeModule,
+    SubscriptionModule,
     DatabaseModule,
     MailModule,
     ScheduleMailModule,

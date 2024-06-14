@@ -1,8 +1,8 @@
+import { Email } from '../entities/email.entity';
+import { ExistingEmailException } from '../exceptions/existing-email.exception';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Email } from '../entities/email.entity';
-import { ExistingEmailException } from '../exceptions/existing-email.exception';
 
 @Injectable()
 export class EmailService {

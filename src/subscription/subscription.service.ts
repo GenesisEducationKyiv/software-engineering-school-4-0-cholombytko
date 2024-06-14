@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { EmailService } from 'src/email/services/email.service';
-import { MailingService } from 'src/email/services/mailing.service';
 import { ICreateSubscription } from './interfaces/create-subscription.interface';
 import { ISendToSubscribers } from './interfaces/send-to-subscribers.interface';
 import { ISubscribeResult } from './interfaces/subscribe-response.interface';
+import { Injectable } from '@nestjs/common';
+import { EmailService } from 'src/email/services/email.service';
+import { MailingService } from 'src/email/services/mailing.service';
 
 @Injectable()
-export class SubscribeService {
+export class SubscriptionService {
   constructor(
     private readonly emailService: EmailService,
     private readonly mailingService: MailingService,
@@ -16,7 +16,7 @@ export class SubscribeService {
     payload: ICreateSubscription,
   ): Promise<ISubscribeResult> {
     await this.emailService.create(payload.email);
-    return { message: 'E-mail succesfully subscribed' };
+    return { message: 'E-mail successfully subscribed' };
   }
 
   public async sendMailToSubscribers(
@@ -25,9 +25,9 @@ export class SubscribeService {
     const subscribers = await this.emailService.findAll(true);
     const mailPromises = subscribers.map((subscriber) =>
       this.mailingService.sendMail({
-        to: subscriber.email,
-        subject: payload.subject,
         html: payload.html,
+        subject: payload.subject,
+        to: subscriber.email,
       }),
     );
 

@@ -1,9 +1,9 @@
+import { IGetExchangeRateResponse } from './interfaces/get-exchange-rate.interface';
+import { IRate } from './interfaces/rate.interface';
+import { API_URL } from './rate.constants';
 import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
-import { API_URL } from './rate.constants';
-import { IRate } from './interfaces/rate.interface';
-import { IGetExchangeRateResponse } from './interfaces/get-exchange-rate.interface';
 
 @Injectable()
 export class RateService {
@@ -18,9 +18,9 @@ export class RateService {
       const data = response.data[0];
 
       return {
+        currencyCode: data.cc,
         date: data.exchangedate,
         rate: data.rate,
-        currencyCode: data.cc,
       };
     } catch (error) {
       throw new HttpException('Invalid status value', HttpStatus.BAD_REQUEST);

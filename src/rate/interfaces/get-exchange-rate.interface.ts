@@ -1,11 +1,11 @@
 export interface IGetExchangeRateResponse {
-  readonly r030: number;
-
-  readonly txt: string;
-
-  readonly rate: number;
-
   readonly cc: string;
 
   readonly exchangedate: string;
+
+  readonly r030: number;
+
+  readonly rate: number;
+
+  readonly txt: string;
 }

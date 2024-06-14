@@ -1,24 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { RateService } from 'src/rate/rate.service';
-import { SubscribeService } from 'src/subscribe/subscribe.service';
+import { SubscriptionService } from 'src/subscription/subscription.service';
 
 @Injectable()
 export class ScheduleService {
   constructor(
-    private readonly subscribeService: SubscribeService,
+    private readonly subscriptionService: SubscriptionService,
     private readonly rateService: RateService,
   ) {}
 
   @Cron(CronExpression.EVERY_DAY_AT_NOON)
   public async sendEmails(): Promise<void> {
-    const { currencyCode, rate, date } =
+    const { currencyCode, date, rate } =
       await this.rateService.getExchangeRate();
 
     const mailMessage = this.mailHtmlTemplate(currencyCode, rate, date);
     const mailSubject = 'Exchange rate USD to UAH';
 
-    await this.subscribeService.sendMailToSubscribers({
+    await this.subscriptionService.sendMailToSubscribers({
       html: mailMessage,
       subject: mailSubject,
     });

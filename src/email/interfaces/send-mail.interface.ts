@@ -1,7 +1,7 @@
 export interface ISendMail {
-  readonly to: string;
+  readonly html: string;
 
   readonly subject: string;
 
-  readonly html: string;
+  readonly to: string;
 }
