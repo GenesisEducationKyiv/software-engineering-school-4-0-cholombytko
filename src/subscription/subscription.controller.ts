@@ -1,11 +1,11 @@
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { ISubscribeResult } from './interfaces/subscribe-response.interface';
-import { SubscriptionService } from './subscription.service';
+import { ISubscriptionService } from './interfaces/subscription-service.interface';
 import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 
 @Controller('subscribe')
 export class SubscriptionController {
-  constructor(private readonly subscriptionService: SubscriptionService) {}
+  constructor(private readonly subscriptionService: ISubscriptionService) {}
 
   @Post()
   @HttpCode(HttpStatus.OK)
