@@ -2,13 +2,13 @@ import { ICreateSubscription } from './interfaces/create-subscription.interface'
 import { ISendToSubscribers } from './interfaces/send-to-subscribers.interface';
 import { ISubscribeResult } from './interfaces/subscribe-response.interface';
 import { Injectable } from '@nestjs/common';
+import { IEmailService } from 'src/email/interfaces/email-service.interface';
 import { IMailingService } from 'src/email/interfaces/mailing-service.interface';
-import { EmailService } from 'src/email/services/email.service';
 
 @Injectable()
 export class SubscriptionService {
   constructor(
-    private readonly emailService: EmailService,
+    private readonly emailService: IEmailService,
     private readonly mailingService: IMailingService,
   ) {}
 
