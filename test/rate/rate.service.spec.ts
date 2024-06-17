@@ -1,5 +1,5 @@
-import { IGetExchangeRateResponse } from './interfaces/get-exchange-rate.interface';
-import { RateService } from './rate.service';
+import { IGetExchangeRateResponse } from '../../src/rate/interfaces/get-exchange-rate.interface';
+import { RateService } from '../../src/rate/rate.service';
 import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';

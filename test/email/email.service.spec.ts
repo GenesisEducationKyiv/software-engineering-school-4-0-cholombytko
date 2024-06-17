@@ -1,6 +1,6 @@
-import { Email } from '../entities/email.entity';
-import { ExistingEmailException } from '../exceptions/existing-email.exception';
-import { EmailService } from './email.service';
+import { Email } from '../../src/email/entities/email.entity';
+import { ExistingEmailException } from '../../src/email/exceptions/existing-email.exception';
+import { EmailService } from '../../src/email/services/email.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
