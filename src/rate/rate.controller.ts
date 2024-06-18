@@ -1,9 +1,9 @@
-import { RateService } from './rate.service';
+import { IRateService } from './interfaces/rate-service.interface';
 import { Controller, Get } from '@nestjs/common';
 
 @Controller('rate')
 export class RateController {
-  constructor(private readonly rateService: RateService) {}
+  constructor(private readonly rateService: IRateService) {}
 
   @Get()
   public async getExchangeRate() {

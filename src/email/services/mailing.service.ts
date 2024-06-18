@@ -1,11 +1,19 @@
+import { IRate } from '../../../src/rate/interfaces/rate.interface';
+import { IRateService } from '../../../src/rate/interfaces/rate-service.interface';
 import { MailSendingException } from '../exceptions/mail-sending.exception';
+import { IEmailService } from '../interfaces/email-service.interface';
+import { IMailingService } from '../interfaces/mailing-service.interface';
 import { ISendMail } from '../interfaces/send-mail.interface';
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
-export class MailingService {
-  constructor(private readonly mailerService: MailerService) {}
+export class MailingService implements IMailingService {
+  constructor(
+    private readonly mailerService: MailerService,
+    private readonly rateService: IRateService,
+    private readonly emailService: IEmailService,
+  ) {}
 
   public async sendMail(payload: ISendMail): Promise<void> {
     try {
@@ -18,5 +26,31 @@ export class MailingService {
       console.error('Error sending email: ', error);
       throw new MailSendingException();
     }
+  }
+
+  public async sendMailsToSubscribers(payload: IRate): Promise<void> {
+    const { currencyCode, date, rate } = payload;
+
+    const mailMessage = this.mailHtmlTemplate(currencyCode, rate, date);
+    const mailSubject = 'Exchange rate USD to UAH';
+
+    const subscribers = await this.emailService.findAll(true);
+    const mailPromises = subscribers.map((subscriber) =>
+      this.sendMail({
+        html: mailMessage,
+        subject: mailSubject,
+        to: subscriber.email,
+      }),
+    );
+
+    await Promise.allSettled(mailPromises);
+  }
+
+  private mailHtmlTemplate(
+    currencyCode: string,
+    rate: number,
+    date: string,
+  ): string {
+    return `<p>Current rate ${currencyCode} to UAH - ${rate}. Date: ${date}</p>`;
   }
 }
