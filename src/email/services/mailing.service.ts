@@ -43,7 +43,7 @@ export class MailingService implements IMailingService {
       }),
     );
 
-    await Promise.all(mailPromises);
+    await Promise.allSettled(mailPromises);
   }
 
   private mailHtmlTemplate(
