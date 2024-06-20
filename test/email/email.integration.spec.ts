@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { DatabaseModule } from '../../src/database.module';
 import { Email } from '../../src/email/entities/email.entity';
 import { ExistingEmailException } from '../../src/email/exceptions/existing-email.exception';
