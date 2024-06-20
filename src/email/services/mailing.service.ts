@@ -1,11 +1,11 @@
+import { IRate } from '../../../src/rate/interfaces/rate.interface';
+import { IRateService } from '../../../src/rate/interfaces/rate-service.interface';
 import { MailSendingException } from '../exceptions/mail-sending.exception';
 import { IEmailService } from '../interfaces/email-service.interface';
 import { IMailingService } from '../interfaces/mailing-service.interface';
 import { ISendMail } from '../interfaces/send-mail.interface';
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
-import { IRate } from 'src/rate/interfaces/rate.interface';
-import { IRateService } from 'src/rate/interfaces/rate-service.interface';
 
 @Injectable()
 export class MailingService implements IMailingService {
@@ -43,7 +43,7 @@ export class MailingService implements IMailingService {
       }),
     );
 
-    await Promise.all(mailPromises);
+    await Promise.allSettled(mailPromises);
   }
 
   private mailHtmlTemplate(
