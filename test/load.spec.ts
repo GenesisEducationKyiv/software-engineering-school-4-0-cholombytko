@@ -20,12 +20,12 @@ const rateMetric = new Rate('failed_requests');
 export default function () {
   const res = http.get(`${BASE_URL}/rate`);
 
-  const result = check(res, {
+  const isSuccessful = check(res, {
     isResponseTimeBelow200ms: (r) => r.timings.duration < 200,
     isStatus200: (r) => r.status === 200,
   });
 
-  rateMetric.add(!result);
+  rateMetric.add(!isSuccessful);
 
   sleep(1);
 }
