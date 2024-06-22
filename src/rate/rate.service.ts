@@ -1,7 +1,7 @@
 import { IGetExchangeRateResponse } from './interfaces/get-exchange-rate.interface';
 import { IRate } from './interfaces/rate.interface';
 import { IRateService } from './interfaces/rate-service.interface';
-import { API_URL } from './rate.constants';
+import { NBU_EXCHANGE_API_URL } from './rate.constants';
 import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
@@ -13,7 +13,7 @@ export class RateService implements IRateService {
   public async getExchangeRate(): Promise<IRate> {
     try {
       const response = await firstValueFrom(
-        this.httpService.get<IGetExchangeRateResponse[]>(API_URL),
+        this.httpService.get<IGetExchangeRateResponse[]>(NBU_EXCHANGE_API_URL),
       );
 
       const data = response.data[0];
