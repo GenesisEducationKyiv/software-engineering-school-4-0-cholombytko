@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common';
 
-export function Log(targetUrl: string) {
+export function LogRateRequest(targetUrl: string) {
   const logger = new Logger('Handler');
 
   return function (

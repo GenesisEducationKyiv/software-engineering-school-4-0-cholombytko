@@ -1,7 +1,7 @@
 import { IHandler } from '../interfaces/handler.interface';
 import { INBUApiResponse } from '../interfaces/nbu-api-response.interface';
 import { IRate } from '../interfaces/rate.interface';
-import { Log } from '../logging/logger.decorator';
+import { LogRateRequest } from '../logging/logger.decorator';
 import { NBU_EXCHANGE_API_URL } from '../rate.constants';
 import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
@@ -19,7 +19,7 @@ export class NBUHandler implements IHandler {
     return handler;
   }
 
-  @Log(NBU_EXCHANGE_API_URL)
+  @LogRateRequest(NBU_EXCHANGE_API_URL)
   async handle(): Promise<IRate> {
     try {
       const response = await firstValueFrom(

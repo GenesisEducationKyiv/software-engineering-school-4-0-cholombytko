@@ -1,7 +1,7 @@
 import { ICurrencyApiResponse } from '../interfaces/currency-api-response.interface';
 import { IHandler } from '../interfaces/handler.interface';
 import { IRate } from '../interfaces/rate.interface';
-import { Log } from '../logging/logger.decorator';
+import { LogRateRequest } from '../logging/logger.decorator';
 import { CURRENCY_API_URL } from '../rate.constants';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
@@ -18,7 +18,7 @@ export class CurrencyApiHandler implements IHandler {
     return handler;
   }
 
-  @Log(CURRENCY_API_URL)
+  @LogRateRequest(CURRENCY_API_URL)
   async handle(): Promise<IRate> {
     try {
       const response = await firstValueFrom(
