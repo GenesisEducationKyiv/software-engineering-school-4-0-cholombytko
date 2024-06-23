@@ -1,18 +1,17 @@
 import { IRate } from '../../../src/rate/interfaces/rate.interface';
-import { IRateService } from '../../../src/rate/interfaces/rate-service.interface';
+import { EMAIL_SERVICE_TOKEN } from '../email.tokens';
 import { MailSendingException } from '../exceptions/mail-sending.exception';
 import { IEmailService } from '../interfaces/email-service.interface';
 import { IMailingService } from '../interfaces/mailing-service.interface';
 import { ISendMail } from '../interfaces/send-mail.interface';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class MailingService implements IMailingService {
   constructor(
     private readonly mailerService: MailerService,
-    private readonly rateService: IRateService,
-    private readonly emailService: IEmailService,
+    @Inject(EMAIL_SERVICE_TOKEN) private readonly emailService: IEmailService,
   ) {}
 
   public async sendMail(payload: ISendMail): Promise<void> {

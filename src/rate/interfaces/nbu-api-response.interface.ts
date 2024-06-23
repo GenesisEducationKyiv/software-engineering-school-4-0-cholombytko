@@ -1,4 +1,4 @@
-export interface IGetExchangeRateResponse {
+export interface INBUApiResponse {
   readonly cc: string;
 
   readonly exchangedate: string;

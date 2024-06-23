@@ -1,4 +1,4 @@
-import { IGetExchangeRateResponse } from '../../src/rate/interfaces/get-exchange-rate.interface';
+import { IGetExchangeRateResponse } from '../../src/rate/interfaces/nbu-api-response.interface';
 import { RateService } from '../../src/rate/rate.service';
 import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus } from '@nestjs/common';
