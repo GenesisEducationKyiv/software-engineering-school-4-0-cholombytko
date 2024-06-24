@@ -4,13 +4,12 @@ import { IRate } from '../interfaces/rate.interface';
 import { LogRateRequest } from '../logging/logger.decorator';
 import { NBU_EXCHANGE_API_URL } from '../rate.constants';
 import { HttpService } from '@nestjs/axios';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class NBUHandler implements IHandler {
   private nextHandler: IHandler;
-  private readonly logger = new Logger();
 
   constructor(private readonly httpService: HttpService) {}
 
