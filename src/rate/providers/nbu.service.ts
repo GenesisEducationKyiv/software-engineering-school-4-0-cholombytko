@@ -13,7 +13,6 @@ export class NBUHandler implements IHandler {
 
   @LogRateRequest(NBU_EXCHANGE_API_URL)
   async handle(): Promise<IRate> {
-    throw new Error('Test');
     const response = await firstValueFrom(
       this.httpService.get<INBUApiResponse[]>(NBU_EXCHANGE_API_URL),
     );
