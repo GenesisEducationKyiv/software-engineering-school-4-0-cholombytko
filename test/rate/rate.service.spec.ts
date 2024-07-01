@@ -1,4 +1,4 @@
-import { IGetExchangeRateResponse } from '../../src/rate/interfaces/nbu-api-response.interface';
+import { INBUApiResponse } from '../../src/rate/interfaces/nbu-api-response.interface';
 import { RateService } from '../../src/rate/services/rate.service';
 import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus } from '@nestjs/common';
@@ -28,7 +28,7 @@ describe('RateService', () => {
   });
 
   it('should return exchange rate data on success', async () => {
-    const exchangeRateResponse: IGetExchangeRateResponse[] = [
+    const exchangeRateResponse: INBUApiResponse[] = [
       {
         cc: 'USD',
         exchangedate: '2024-06-17',
@@ -38,7 +38,7 @@ describe('RateService', () => {
       },
     ];
 
-    const axiosResponse: AxiosResponse<IGetExchangeRateResponse[]> = {
+    const axiosResponse: AxiosResponse<INBUApiResponse[]> = {
       config: {
         headers: {} as AxiosRequestHeaders,
         method: 'get',
