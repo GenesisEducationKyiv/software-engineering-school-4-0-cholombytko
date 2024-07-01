@@ -1,6 +1,6 @@
-import { DatabaseModule } from './database.module';
+import { DatabaseModule } from './common/database.module';
+import { MailModule } from './common/mail.module';
 import { EmailModule } from './email/email.module';
-import { MailModule } from './mail.module';
 import { RateModule } from './rate/rate.module';
 import { ScheduleModule as ScheduleMailModule } from './schedule/schedule.module';
 import { SubscriptionModule } from './subscription/subscription.module';
