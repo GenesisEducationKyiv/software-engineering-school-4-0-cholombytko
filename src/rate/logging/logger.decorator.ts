@@ -11,15 +11,20 @@ export function LogRateRequest(targetUrl: string) {
     const originalMethod = descriptor.value;
 
     descriptor.value = async function (...args: any[]) {
-      logger.log(`Fetching data from ${targetUrl}`);
+      const now = new Date().toISOString();
+      logger.log(`Fetching data from ${targetUrl} at ${now}`);
       try {
         const result = await originalMethod.apply(this, args);
         logger.log(
-          `Data was successfully fetched. Response: ${JSON.stringify(result)}`,
+          `Data was successfully fetched from ${targetUrl} at ${now}. Response: ${JSON.stringify(
+            result,
+          )}`,
         );
         return result;
       } catch (error) {
-        logger.error(`There was an error during fetch. Response: ${error}`);
+        logger.error(
+          `Error during fetch from ${targetUrl} at ${now}. Error: ${error}`,
+        );
         throw error;
       }
     };

@@ -9,34 +9,20 @@ import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class NBUHandler implements IHandler {
-  private nextHandler: IHandler;
-
   constructor(private readonly httpService: HttpService) {}
-
-  setNext(handler: IHandler): IHandler {
-    this.nextHandler = handler;
-    return handler;
-  }
 
   @LogRateRequest(NBU_EXCHANGE_API_URL)
   async handle(): Promise<IRate> {
-    try {
-      const response = await firstValueFrom(
-        this.httpService.get<INBUApiResponse[]>(NBU_EXCHANGE_API_URL),
-      );
-      const data = response.data[0];
-      const date = new Date().toLocaleDateString();
+    const response = await firstValueFrom(
+      this.httpService.get<INBUApiResponse[]>(NBU_EXCHANGE_API_URL),
+    );
+    const data = response.data[0];
+    const date = new Date().toLocaleDateString();
 
-      return {
-        currencyCode: data.cc,
-        date,
-        rate: data.rate,
-      };
-    } catch (error) {
-      if (this.nextHandler) {
-        return this.nextHandler.handle();
-      }
-      throw error;
-    }
+    return {
+      currencyCode: data.cc,
+      date,
+      rate: data.rate,
+    };
   }
 }
