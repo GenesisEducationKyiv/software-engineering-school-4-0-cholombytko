@@ -9,34 +9,20 @@ import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class CurrencyApiHandler implements IHandler {
-  private nextHandler: IHandler;
-
   constructor(private readonly httpService: HttpService) {}
-
-  setNext(handler: IHandler): IHandler {
-    this.nextHandler = handler;
-    return handler;
-  }
 
   @LogRateRequest(CURRENCY_API_URL)
   async handle(): Promise<IRate> {
-    try {
-      const response = await firstValueFrom(
-        this.httpService.get<ICurrencyApiResponse>(CURRENCY_API_URL),
-      );
-      const data = response.data;
-      const date = new Date().toLocaleDateString();
+    const response = await firstValueFrom(
+      this.httpService.get<ICurrencyApiResponse>(CURRENCY_API_URL),
+    );
+    const data = response.data;
+    const date = new Date().toLocaleDateString();
 
-      return {
-        currencyCode: 'USD',
-        date,
-        rate: +data.usd['uah'],
-      };
-    } catch (error) {
-      if (this.nextHandler) {
-        return this.nextHandler.handle();
-      }
-      throw error;
-    }
+    return {
+      currencyCode: 'USD',
+      date,
+      rate: +data.usd['uah'],
+    };
   }
 }
