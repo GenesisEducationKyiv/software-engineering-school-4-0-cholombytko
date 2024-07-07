@@ -36,6 +36,28 @@ services:
       - rabbitmq
       - test_db
 
+  rate:
+    build:
+      context: ./rate
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "3002:3000"
+    depends_on:
+      - rabbitmq
+
+  email-sender:
+    build:
+      context: ./email-sender
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "3003:3000"
+    depends_on:
+      - rabbitmq
+
   db:
     image: postgres:14
     restart: always
