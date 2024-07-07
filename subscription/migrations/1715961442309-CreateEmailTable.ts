@@ -4,30 +4,31 @@ export class CreateEmailTable1715961442309 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'email',
         columns: [
           {
+            generationStrategy: 'increment',
+            isGenerated: true,
+            isPrimary: true,
             name: 'id',
             type: 'int',
-            isPrimary: true,
-            isGenerated: true,
-            generationStrategy: 'increment',
           },
           {
+            isUnique: true,
             name: 'email',
             type: 'varchar',
-            isUnique: true,
           },
           {
+            default: true,
             name: 'isSubscribed',
             type: 'boolean',
-            default: true,
           },
         ],
+        name: 'email',
       }),
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async down(queryRunner: QueryRunner): Promise<void> {
     return;
   }
