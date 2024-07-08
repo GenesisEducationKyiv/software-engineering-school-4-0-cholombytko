@@ -11,7 +11,7 @@ export class AppController {
     private readonly subscriptionService: ISubscriptionService,
   ) {}
 
-  @EventPattern('add-subscriber')
+  @EventPattern('add_subscriber')
   async handleSubscribe(@Payload() payload: CreateSubscriptionDto) {
     await this.subscriptionService.createSubscription(payload);
   }

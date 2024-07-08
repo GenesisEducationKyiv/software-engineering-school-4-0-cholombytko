@@ -12,6 +12,6 @@ export class AppService {
 
   async subscribe(payload: ISubscribe): Promise<void> {
     this.logger.log(payload);
-    this.subscriptionClient.emit('add-subscriber', payload);
+    this.subscriptionClient.emit('add_subscriber', payload);
   }
 }
