@@ -1,6 +1,10 @@
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
-import { ClientProxy, MicroserviceOptions, Transport } from '@nestjs/microservices';
+import {
+  ClientProxy,
+  MicroserviceOptions,
+  Transport,
+} from '@nestjs/microservices';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
