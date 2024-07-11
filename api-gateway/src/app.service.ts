@@ -13,9 +13,16 @@ export class AppService {
     @Inject('RATE_SERVICE') private rateClient: ClientProxy,
   ) {}
 
-  async subscribe(payload: ISubscribe): Promise<void> {
-    this.logger.log(payload);
-    this.subscriptionClient.emit('add-subscriber', payload);
+  async subscribe(data: ISubscribe): Promise<void> {
+    this.logger.log(data);
+    const result = await firstValueFrom(
+      this.subscriptionClient.send(
+        { cmd: 'add_subscriber' },
+        JSON.stringify({ data }),
+      ),
+    );
+    this.logger.log(result);
+    return result;
   }
 
   async getRate(): Promise<IRate> {
