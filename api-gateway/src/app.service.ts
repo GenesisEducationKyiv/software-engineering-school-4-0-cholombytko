@@ -1,4 +1,5 @@
 import { ISubscribe } from './interfaces/subscribe.interface';
+import { IUnsubscribe } from './interfaces/unsubscribe.interface';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
@@ -10,8 +11,17 @@ export class AppService {
     @Inject('SUBSCRIPTION_SERVICE') private subscriptionClient: ClientProxy,
   ) {}
 
-  async subscribe(payload: ISubscribe): Promise<void> {
-    this.logger.log(payload);
-    this.subscriptionClient.emit('add-subscriber', payload);
+  async subscribe(data: ISubscribe): Promise<void> {
+    this.logger.log(data);
+    const response = this.subscriptionClient.send(
+      { cmd: 'add_subscriber' },
+      data,
+    );
+    this.logger.log(response);
+  }
+
+  async unsubscribe(data: IUnsubscribe): Promise<void> {
+    this.logger.log(data);
+    this.subscriptionClient.emit('unsubscribe', data);
   }
 }

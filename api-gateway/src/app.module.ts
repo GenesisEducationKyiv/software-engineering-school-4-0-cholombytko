@@ -1,11 +1,12 @@
 import { API_GATEWAY_TOKEN } from './app.constants';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { SubscriptionController } from './controllers/subscription.controller';
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
-  controllers: [AppController],
+  controllers: [AppController, SubscriptionController],
   imports: [
     ClientsModule.register([
       {
