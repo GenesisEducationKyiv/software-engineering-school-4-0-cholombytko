@@ -2,7 +2,12 @@ import { SUBCRIPTION_TOKEN } from './app.constants';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { ISubscriptionService } from './interfaces/subscription-service.interface';
 import { Controller, Inject, Logger } from '@nestjs/common';
-import { EventPattern, MessagePattern, Payload, Transport } from '@nestjs/microservices';
+import {
+  EventPattern,
+  MessagePattern,
+  Payload,
+  Transport,
+} from '@nestjs/microservices';
 
 @Controller()
 export class AppController {

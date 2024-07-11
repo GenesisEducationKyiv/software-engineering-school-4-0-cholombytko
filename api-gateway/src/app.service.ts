@@ -24,8 +24,4 @@ export class AppService {
     this.logger.log(data);
     this.subscriptionClient.emit('unsubscribe', data);
   }
-
-  async getRate(): Promise<void> {
-
-  }
 }
