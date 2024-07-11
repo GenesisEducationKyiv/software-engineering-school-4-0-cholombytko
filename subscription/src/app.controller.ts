@@ -2,7 +2,7 @@ import { SUBCRIPTION_TOKEN } from './app.constants';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { ISubscriptionService } from './interfaces/subscription-service.interface';
 import { Controller, Inject, Logger } from '@nestjs/common';
-import { EventPattern, Payload } from '@nestjs/microservices';
+import { EventPattern, MessagePattern, Payload, Transport } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
@@ -11,8 +11,8 @@ export class AppController {
     private readonly subscriptionService: ISubscriptionService,
   ) {}
 
-  @EventPattern('add_subscriber')
-  async handleSubscribe(@Payload() payload: CreateSubscriptionDto) {
-    await this.subscriptionService.createSubscription(payload);
+  @MessagePattern({ cmd: 'add_subscriber' }, Transport.RMQ)
+  async handleSubscribe(@Payload() data: CreateSubscriptionDto) {
+    return await this.subscriptionService.createSubscription(data);
   }
 }
