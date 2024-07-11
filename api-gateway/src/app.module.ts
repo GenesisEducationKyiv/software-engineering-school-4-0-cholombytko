@@ -34,6 +34,19 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         },
         transport: Transport.RMQ,
       },
+      {
+        name: 'EMAILS_SERVICE',
+        options: {
+          queue: 'emails_queue',
+          queueOptions: {
+            durable: false,
+          },
+          urls: [
+            `amqp://${process.env.RABBITMQ_DEFAULT_USER}:${process.env.RABBITMQ_DEFAULT_PASSWORD}@rabbitmq:5672`,
+          ],
+        },
+        transport: Transport.RMQ,
+      },
     ]),
   ],
   providers: [

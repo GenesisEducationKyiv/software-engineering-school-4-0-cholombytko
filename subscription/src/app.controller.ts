@@ -16,7 +16,14 @@ export class AppController {
   @MessagePattern({ cmd: 'add_subscriber' }, Transport.RMQ)
   async handleSubscribe(@Payload() data: CreateSubscriptionDto) {
     const result = await this.subscriptionService.createSubscription(data);
-    this.logger.debug(result);
+    this.logger.log(result);
+    return result;
+  }
+
+  @MessagePattern({ cmd: 'get_all_subscribers' }, Transport.RMQ)
+  async handleGetAllSubscribers() {
+    const result = await this.subscriptionService.findAllSubscribers();
+    this.logger.log(result);
     return result;
   }
 }

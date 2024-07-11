@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { MAILING_SERVICE_TOKEN } from './app.constants';
 
 @Module({
   imports: [
@@ -16,6 +17,11 @@ import { MailerModule } from '@nestjs-modules/mailer';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: MAILING_SERVICE_TOKEN,
+      useClass: AppService,
+    },
+  ],
 })
 export class AppModule {}

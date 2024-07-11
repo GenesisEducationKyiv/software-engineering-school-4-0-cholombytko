@@ -11,6 +11,7 @@ export class AppService {
   constructor(
     @Inject('SUBSCRIPTION_SERVICE') private subscriptionClient: ClientProxy,
     @Inject('RATE_SERVICE') private rateClient: ClientProxy,
+    @Inject('EMAILS_SERVICE') private emailsClient: ClientProxy,
   ) {}
 
   async subscribe(data: ISubscribe): Promise<void> {
@@ -25,9 +26,26 @@ export class AppService {
     return result;
   }
 
+  async getSubscribers(): Promise<[]> {
+    const result = await firstValueFrom(
+      this.subscriptionClient.send({ cmd: 'get_all_subscribers' }, {}),
+    );
+    return result;
+  }
+
   async getRate(): Promise<IRate> {
     const result = await firstValueFrom(
       this.rateClient.send({ cmd: 'get_rate' }, {}),
+    );
+    return result;
+  }
+
+  async sendEmails() {
+    const rate = await this.getRate();
+    const subscribers = await this.getSubscribers();
+    const data = { rate, subscribers };
+    const result = await firstValueFrom(
+      this.emailsClient.send({ cmd: 'send_emails' }, JSON.stringify(data)),
     );
     return result;
   }

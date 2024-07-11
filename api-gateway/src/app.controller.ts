@@ -33,4 +33,9 @@ export class AppController {
   async getRate(): Promise<IGetExchangeRateResponse> {
     return await this.apiGatewayService.getRate();
   }
+
+  @Post('/send-emails')
+  async sendEmails() {
+    return await this.apiGatewayService.sendEmails();
+  }
 }
