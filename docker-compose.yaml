@@ -1,17 +1,62 @@
 version: '3.8'
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  rabbitmq:
+    image: rabbitmq:3-management
     env_file: .env
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+  subscription:
+    build:
+      context: ./subscription
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db
+      - rabbitmq
+      - test_db
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    env_file:
+      - .env
     ports:
       - "3000:3000"
     depends_on:
       - db
+      - rabbitmq
       - test_db
-    environment:
-      - NODE_ENV=$NODE_ENV
+
+  rate:
+    build:
+      context: ./rate
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "3002:3000"
+    depends_on:
+      - rabbitmq
+
+  email-sender:
+    build:
+      context: ./email-sender
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "3003:3000"
+    depends_on:
+      - rabbitmq
 
   db:
     image: postgres:14

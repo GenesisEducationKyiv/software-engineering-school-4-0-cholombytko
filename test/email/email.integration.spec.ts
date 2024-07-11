@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { DatabaseModule } from '../../src/database.module';
+import { DatabaseModule } from '../../src/common/database.module';
 import { Email } from '../../src/email/entities/email.entity';
 import { ExistingEmailException } from '../../src/email/exceptions/existing-email.exception';
 import { EmailService } from '../../src/email/services/email.service';
