@@ -1,2 +1,3 @@
 Implement customer service
 Implement saga orchestration(RMQ)
+Implement logging
